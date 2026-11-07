@@ -1,12 +1,12 @@
 # Showcase and Security Audit
 
-_Last verified: 2026-07-21_
+_Last verified: 2026-11-07_
 
 ## Executive Summary
 
 This repository is a static React 19 and Vite portfolio deployed to GitHub Pages. No open critical, high, or medium application-security findings were found for its current threat model. The audit fixed development-tool advisories, removed an unnecessary production CSP relaxation, pinned GitHub Actions to immutable commits, and corrected stale public documentation and preview content.
 
-The remaining low-severity limitation is imposed by GitHub Pages: it cannot configure project-specific HTTP response headers. The app therefore uses an early meta-delivered CSP and referrer policy, while header-only controls remain unavailable on the current host.
+The remaining low-severity limitation is imposed by GitHub Pages: it cannot configure project-specific HTTP response headers. The app therefore uses an early meta-delivered CSP and referrer policy, while header-only controls remain unavailable on the current host. A visitor-facing privacy disclosure and machine-readable security contact are published as static assets.
 
 ## Scope
 
@@ -33,6 +33,14 @@ The production `style-src` allowed `'unsafe-inline'` even though the built app e
 
 All third-party Actions are pinned to full commit SHAs, with version comments retained for readability. Dependabot remains configured to update GitHub Actions weekly. Workflow permissions remain least-privilege, and CI plus deployment both call the repository's shared `npm run check` gate.
 
+### Dependency advisories
+
+The November 2026 dependency refresh updated Vite and its transitive tooling dependencies. Both `npm audit` and `npm audit --omit=dev` report zero vulnerabilities.
+
+### Privacy disclosure and security contact
+
+The footer links to a static privacy page documenting the absence of analytics, cookies, browser storage, forms, and third-party scripts, plus the handling of direct email. `public/.well-known/security.txt` publishes the vulnerability-reporting contact and canonical URL.
+
 ### Stale showcase claims and assets
 
 The README and roadmap described five projects, 36 tests, 12 visual scenarios, stale performance guarantees, and mutable Action tags. They now match the four-project app, 38-test suite, 16-scenario browser smoke, current security posture, and maintenance workflow. The README and social preview generation script now refreshes both images from the production build.
@@ -54,7 +62,7 @@ The README and roadmap described five projects, 36 tests, 12 visual scenarios, s
 - External links use `rel="noopener noreferrer"`.
 - Production source maps are disabled.
 - Fonts and images are self-hosted; the runtime has no third-party script dependency.
-- Early meta CSP includes same-origin defaults, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, and HTTPS upgrades.
+- Early meta CSP includes same-origin defaults, same-origin manifest, no frames/media/workers, no inline script/style attributes, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, and HTTPS upgrades.
 - CI uses `npm ci`, scoped permissions, CodeQL, and Dependabot.
 - Automated `axe-core` coverage, keyboard navigation tests, reduced-motion handling, and visible focus styles.
 

@@ -11,7 +11,8 @@
 
 > Single-page React 19 portfolio with hash-based sections, CI-enforced quality gates
 > (format + lint + test + build), a strict production CSP, automated accessibility checks,
-> and production-browser smoke coverage.
+> and production-browser smoke coverage. The site publishes a privacy disclosure and a
+> machine-readable security contact; it has no analytics, cookies, storage, or third-party scripts.
 
 ---
 
@@ -53,6 +54,7 @@ Highlights selected engineering work, language breadth, certifications, and AI w
 - **Accessibility-first** — skip link, `aria-current` nav, reduced-motion support, keyboard focus management, semantic landmarks, descriptive alt text
 - **Data-driven content** — projects, languages, certifications, and social links centralized in `src/data/*`
 - **Web app metadata** — manifest, themed favicons, OG/Twitter preview, and JSON-LD `Person` schema
+- **Privacy and reporting** — static privacy disclosure, no tracking/storage, and `.well-known/security.txt`
 - **CI/CD** — GitHub Actions runs format + lint + test + build on every push; separate workflow deploys to GitHub Pages
 
 ## Performance & Accessibility
@@ -96,12 +98,13 @@ Manual release smoke:
 
 ## Security
 
-- Strict production `Content-Security-Policy` meta tag: `default-src 'self'`, scripts same-origin only, fonts self-hosted (no third-party origins), no inline executable scripts, `upgrade-insecure-requests`, `object-src 'none'`, `form-action 'self'`
+- Strict production `Content-Security-Policy` meta tag: `default-src 'self'`, scripts and styles same-origin only, no frames/media/workers, fonts self-hosted (no third-party origins), no inline executable scripts or style attributes, `upgrade-insecure-requests`, `object-src 'none'`, `form-action 'self'`
 - `Referrer-Policy: strict-origin-when-cross-origin`
+- Visitor-facing [privacy disclosure](https://coleyrockin.github.io/react-portfolio/privacy.html) and `.well-known/security.txt` vulnerability-reporting contact
 - Least-privilege GitHub Actions (`contents: read` on CI; `pages: write` / `id-token: write` scoped only to the deploy job)
 - All outbound links include `rel="noopener noreferrer"`
 - Hash routing is a whitelist match against a known section list — no `innerHTML`, `eval`, or dynamic HTML anywhere
-- Full `npm audit`: **0 vulnerabilities** (last verified 2026-07-21)
+- Full `npm audit`: **0 vulnerabilities** (last verified 2026-11-07)
 
 ## Tech Stack
 
@@ -196,7 +199,7 @@ react-portfolio/
 
 ## Validation Status
 
-Last full local audit: **2026-07-21**.
+Last full local audit: **2026-11-07**.
 
 - `npm run check`: format, lint, 38 tests, and production build pass.
 - `npm audit` and `npm audit --omit=dev`: 0 vulnerabilities.

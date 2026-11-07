@@ -1406,6 +1406,20 @@ a {
   text-transform: uppercase;
 }
 
+.footer-meta {
+  display: grid;
+  gap: 5px;
+}
+
+.footer-privacy-link {
+  width: fit-content;
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: var(--weight-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .footer-links {
   list-style: none;
   margin: 0;
@@ -1442,6 +1456,7 @@ a {
 .project-image-link:focus-visible,
 .social-card:focus-visible,
 .footer-icon:focus-visible,
+.footer-privacy-link:focus-visible,
 .section-link:focus-visible,
 .cert-item a:focus-visible,
 .hero-cta:focus-visible,

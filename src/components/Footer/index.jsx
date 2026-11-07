@@ -24,9 +24,14 @@ function Footer() {
           );
         })}
       </ul>
-      <p className="footer-copy">
-        © {currentYear} Boyd Roberts · Built in React + Vite · Central Texas
-      </p>
+      <div className="footer-meta">
+        <p className="footer-copy">
+          © {currentYear} Boyd Roberts · Built in React + Vite · Central Texas
+        </p>
+        <a className="footer-privacy-link" href={`${import.meta.env.BASE_URL}privacy.html`}>
+          Privacy
+        </a>
+      </div>
     </footer>
   );
 }

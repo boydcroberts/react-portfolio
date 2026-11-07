@@ -138,6 +138,15 @@ describe("Portfolio site", () => {
     });
   });
 
+  test("exposes the privacy disclosure from the footer", () => {
+    render(<App />);
+
+    expect(screen.getByRole("link", { name: "Privacy" })).toHaveAttribute(
+      "href",
+      expect.stringMatching(/privacy\.html$/)
+    );
+  });
+
   test("renders the complete language map and AI section", async () => {
     const user = userEvent.setup();
     render(<App />);
